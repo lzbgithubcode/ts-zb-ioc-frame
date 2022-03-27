@@ -1,0 +1,30 @@
+{
+  "name": "@lzblib/ts-zb-ioc-frame",
+  "version": "1.0.0",
+  "description": "基于solid的ioc架构node + ts",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn  --transpile-only ./src/app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lzbgithubcode/ts-zb-ioc-frame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lzbgithubcode/ts-zb-ioc-frame/issues"
+  },
+  "homepage": "https://github.com/lzbgithubcode/ts-zb-ioc-frame#readme",
+  "dependencies": {
+    "awilix": "^6.1.0",
+    "awilix-koa": "^4.0.0",
+    "koa": "^2.13.4",
+    "typescript": "^4.6.3"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.4",
+    "ts-node-dev": "^1.1.8"
+  }
+}
