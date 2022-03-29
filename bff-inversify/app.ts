@@ -3,16 +3,19 @@
  * 日期: 2022-03-29 16:57
  * 功能:
  */
+
+import "reflect-metadata";
+import "./ioc/loader";
 import {Container} from "inversify";
 import {InversifyKoaServer, interfaces, TYPE} from "inversify-koa-utils";
-import IndexController from "./routes/IndexController";
-import "reflect-metadata";
+import {buildProviderModule } from "inversify-binding-decorators";
+
 
 // 1. 创建容器
 const container = new Container();
 
-// 绑定
-container.bind<interfaces.Controller>(TYPE.Controller).to(IndexController).whenTargetNamed("IndexController");
+// 容器加载
+container.load(buildProviderModule())
 
 // 2. 创建服务
 const server = new InversifyKoaServer(container);

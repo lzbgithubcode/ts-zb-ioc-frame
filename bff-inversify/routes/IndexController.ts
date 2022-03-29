@@ -3,17 +3,16 @@
  * 日期: 2022-03-29 18:25
  * 功能:
  */
-import {interfaces, controller, httpGet} from "inversify-koa-utils";
-import {injectable, inject} from "inversify";
-import {RouterContext} from "koa-router";
+import {interfaces, controller, httpGet, TYPE} from "inversify-koa-utils";
+import {IRouterContext} from "koa-router";
+import {provideThrowable} from "../ioc";
+
 
 @controller("/")
-@injectable()
+@provideThrowable(TYPE.Controller, "IndexController") // 标识可以被注入 // 标识可以被注入
 class IndexController implements interfaces.Controller{
-       constructor() {
-       }
        @httpGet("/")
-       private indexAction(ctx: RouterContext, next: ()=> Promise<any>){
+       private async indexAction(ctx: IRouterContext, next: ()=> Promise<any>){
            ctx.body = "服务已经完成";
        }
 
