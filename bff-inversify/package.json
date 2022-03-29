@@ -1,0 +1,22 @@
+{
+  "name": "@tibi/bff-inversify",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/koa-router": "^7.4.4",
+    "inversify": "^6.0.1",
+    "inversify-koa-utils": "^1.0.0",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^4.6.3"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8"
+  }
+}
