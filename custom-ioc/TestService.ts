@@ -1,6 +1,6 @@
 
 export interface ITypes {
-    [key: string]: Symbol  // key是string  value 是symbol
+    [key: string]: symbol  // key是string  value 是symbol
 }
 
 // 定义类型

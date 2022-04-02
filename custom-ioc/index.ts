@@ -4,42 +4,27 @@
  * 功能:
  */
 
-import {Container} from "./Container";
+import {Container} from "./container";
 import {TestService,TAGS} from "./TestService";
+import {iocController, iocInject} from "./decorator";
 
 // 1. 创建容器
 const container = new Container();
 
 
-// 2.绑定接口注册
-container.bind(TAGS.testService, ()=> new TestService())
-
-// 定义类型
-export type Constructor<T> =  new (...args: any[]) => {};
-
-/**
- *  返回某个控制器class
- */
-function iocController<T>(constructor: Constructor<T>) {
-    class SubController extends constructor{
-        constructor(...args: any[]) {
-            super(args);
-        }
-    }
-    return SubController;
-}
-
-/**
- * 返回某个对象的实例
- */
-function iocInject(key: Symbol): Function {
-    return () => {};
-}
+// 2.绑定接口注册- 到某个类
+container.bind(TAGS.testService).to(TestService);
 
 
-@iocController
+// 3. 使用注册的内容
+
 class IndexController  {
      constructor(@iocInject(TAGS.testService) private testService: TestService) {
         this.testService = testService;
      }
 }
+
+
+const indexController = new IndexController();
+
+console.log('===========',indexController);
