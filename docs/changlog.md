@@ -32,6 +32,24 @@
 ```
 
 
+#### 2022-03-29 inversify的IOC架构搭建
+* ts-node-dev  运行 ts文件
+* typescript   ts文件
+* inversify reflect-metadata  基础[inversify](https://github.com/inversify/InversifyJS)
+* inversify-koa-utils  基于inversify + koa的封装
+
+
+
+**使用inversify的步骤**
+1. 声明interface和type
+2. 使用 @injectable 和 @inject 装饰器声明依赖
+3. 创建和配置容器
+4. 解析依赖
+
+
+#### 2022-03-31 自定义IOC
+
+
 
 
 
