@@ -17,6 +17,6 @@ export interface ITestService {
 
 export class TestService implements ITestService{
     getIndexInfo(): void {
-
+        console.log('我是TestService ----method');
     }
 }

@@ -24,9 +24,12 @@ export interface IContainer {
     get<T>(key: interfaces.TKeyIdentifier): T,
 }
 export class Container implements IContainer{
-      private  _map: Map< interfaces.TKeyIdentifier, interfaces.TConstructor>;
+      protected  _map: Map< interfaces.TKeyIdentifier, interfaces.TConstructor>;
       constructor() {
-          this._map = new Map();
+          if(!this._map){
+              this._map = new Map();
+          }
+
       }
       public bind(key: interfaces.TKeyIdentifier): IToBinding {
           return {

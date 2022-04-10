@@ -5,32 +5,54 @@
  */
 import "reflect-metadata";
 import {interfaces} from "./interfaces";
+import {parseScript} from "esprima";
+import  {Pattern} from "estree";
+import {TAGS} from "./TestService";
 
-
-/**
- * 方法注入元数据
- */
-export function  iocInject(key: string | symbol): Function {
-    return (target: any, propertyKey: string, index: number) => {
-         const metadata = {
-             key: propertyKey,
-             value: key
-         };
-         Reflect.defineMetadata(`custom:paramtypes#${index}`, metadata, target)
-    };
-}
 
 /**
  *  类注入元数据
  */
-export function iocInjectable(constructor: interfaces.TConstructor) {
-    class SubController extends constructor{
-        constructor(...args: any[]) {
-            super(args);
-        }
-    }
-    return  SubController;
+export function iocController<T extends interfaces.TConstructor>(constructor: T) {
+   class SubController extends  constructor{
+       constructor(...args: any[]) {
+           super(...args);
+           const _params = __getFunctionParam(constructor);
+
+           // 遍历参数增加到子控制器
+           let identify: string;
+           for (identify of _params){
+               if(this.hasOwnProperty(identify)){
+                   this[identify] = Reflect.getMetadata(TAGS[identify], constructor);
+               }
+           }
+
+       }
+   }
+   return SubController;
 }
+
+
+/**
+ * 获取函数的参数
+ * @param fn
+ * @private
+ */
+function __getFunctionParam(fn: Function): string[] {
+    const ast = parseScript(fn.toString());
+    const bodyNode = ast.body[0];
+    let params: Pattern[] = [];
+    if(bodyNode.type === 'FunctionDeclaration'){
+        params = bodyNode.params;
+    }
+    let paramsNames: string[] = [];
+    params.map((obj: Pattern)=>{
+         paramsNames.push((obj as any).name)
+    });
+
+    return paramsNames;
+}
+
 
 
 
