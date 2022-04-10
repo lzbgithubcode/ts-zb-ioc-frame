@@ -38,7 +38,7 @@ export function  iocInject(key: string | symbol): Function {
 
         // 表示在构造函数使用
         if(!targetKey){
-            // 设置key对应的示例
+            // 设置key对应的 设置值
             Reflect.defineMetadata(key,container.get(key),target)
         }
     };

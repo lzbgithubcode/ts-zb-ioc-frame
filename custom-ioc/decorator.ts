@@ -23,6 +23,7 @@ export function iocController<T extends interfaces.TConstructor>(constructor: T)
            let identify: string;
            for (identify of _params){
                if(this.hasOwnProperty(identify)){
+                   // 获取值
                    this[identify] = Reflect.getMetadata(TAGS[identify], constructor);
                }
            }
